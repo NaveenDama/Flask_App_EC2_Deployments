@@ -1,0 +1,15 @@
+[Unit]
+Description=FlaskApp Gunicorn Service
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/flask_app
+ExecStart=/usr/bin/gunicorn3 --workers 3 --bind unix:flaskapp.sock -m 007 app:app
+
+Remove all lines below including this line when copying the config:
+
+In WorkingDirectory=<give path of your flask app directory>
+
+In ExecStart=/usr/bin/gunicorn3 -> this is path of gunicorn3 you can find the path n your case by executing "which gunicorn3".

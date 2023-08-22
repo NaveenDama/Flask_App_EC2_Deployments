@@ -1,0 +1,18 @@
+server {
+        listen 80 ;
+        server_name 34.229.41.140 ;
+
+
+        location / {
+
+                proxy_pass http://unix:/home/ubuntu/flask_app/flaskapp.sock;
+        }
+}
+
+Remove all lines below including this line when copying the config:
+
+listen 80 means it will serve http requests only. check your web address to be http://<public-ip of EC2> not https://
+
+server_name 34.229.41.140; -> here replace the IP with your EC2 public IP address.
+
+location / -> Every request starting with "/" will be forwarded to flaskapp.sock present in "/home/ubuntu/flask_app/" folder
